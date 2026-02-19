@@ -1,198 +1,204 @@
-/* charity: water Brand Colors & Fonts
+/* charity: water Brand Palette */
+:root {
+  --cw-yellow: #FFC907;
+  --cw-blue: #2E9DF7;
+  --cw-light-blue: #8BD1CB;
+  --cw-green: #4FCB53;
+  --cw-red: #F5402C;
+  --white: #ffffff;
+  --dark: #222;
+}
 
-Primary Colors:
-- Yellow:     #FFC907
-- Blue:       #2E9DF7
-
-Secondary Colors:
-- Light Blue: #8BD1CB
-- Green:      #4FCB53
-- Orange:     #FF902A
-- Red:        #F5402C
-- Dark Green: #159A48
-- Pink:       #F16061
-
-Fonts:
-- Proxima Nova
-- Avenir
-
-*/
-
-/* 
-  Charity: Water Landing Page Styles
-  This CSS uses the provided color palette and beginner-friendly styles.
-*/
-
-/* Set up the main font and background color for the whole page */
 body {
-  background-color: #f4f8fb; /* Soft light blue for a fresh look */
-  font-family: 'Avenir', 'Proxima Nova', Arial, sans-serif;
+  font-family: 'Avenir', 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  color: #222;
+  line-height: 1.6;
+  background-color: #f4f8fb;
+  color: var(--dark);
 }
 
-/* Add a slight shadow and rounded corners to each section for depth */
-section {
-  background: #fff; /* White background for sections */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.07); /* Soft blue shadow */
-  margin: 24px 10px; /* Space between sections */
-  padding: 24px 16px;
-}
+.container { width: 90%; max-width: 1000px; margin: auto; padding: 2rem 0; }
 
-/* Hero Section Styles */
+/* Hero Section */
 .hero {
-  position: relative; /* Needed for overlay */
-  /* Set a background image that covers the whole section */
-  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
-  background-size: cover;      /* Make the image cover the whole area */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat;
-  color: #fff;                 /* White text for contrast */
-  text-align: center;          /* Center the text */
-  padding: 60px 20px;          /* Add space above and below */
-  border-radius: 0 0 16px 16px; /* Only round bottom corners */
-
-  /* Add a dark overlay for better text readability */
-  /* This uses a simple linear-gradient overlay */
-  background-blend-mode: darken;
-  background-color: rgba(46, 157, 247, 0.45); /* Blue overlay */
-}
-
-/* Make the headline bold and modern */
-.hero h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Soft shadow for readability */
-}
-
-/* Style the subheadline */
-.hero p {
-  font-size: 1.2em;
-  margin-top: 0;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.12);
-}
-
-/* Story Section Styles */
-.story {
-  background-color: #8BD1CB; /* Secondary Light Blue */
-  color: #222;
+  background: linear-gradient(rgba(46, 157, 247, 0.6), rgba(46, 157, 247, 0.6)), 
+              url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
   text-align: center;
-  padding: 30px 20px;
 }
 
-/* Add accent color to section headings */
-h2 {
-  color: #2E9DF7; /* Primary blue */
-  margin-top: 0;
+.hero h1 { font-size: 3.5rem; margin-bottom: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+
+/* Game Styles */
+#game-container {
+  background: var(--white);
+  border: 4px solid var(--cw-blue);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+#game-ui {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: var(--cw-blue);
+  color: var(--white);
   font-weight: bold;
 }
 
-/* Call-to-Action Section Styles */
-.call-to-action {
-  background-color: #FFC907; /* Primary Yellow */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
+#play-space {
+  height: 450px;
+  /* Play area: richer gradient + animated overlay for life */
+  #play-space {
+    position: relative;
+    height: 480px;
+    overflow: hidden;
+    /* base water gradient */
+    background: linear-gradient(180deg, #dff6ff 0%, #eaf9ff 45%, #dceefb 100%);
+    border-radius: 6px;
+  }
+
+  /* gently animated color wash to add subtle motion */
+  .play-gradient {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(120deg, rgba(46,157,247,0.06), rgba(139,209,203,0.04), rgba(255,255,255,0.03));
+    mix-blend-mode: screen;
+    animation: gradient-move 12s ease-in-out infinite;
+  }
+
+  /* Two layered waves for parallax effect (HTML holds the containers) */
+  .waves { position: absolute; left: 0; right: 0; bottom: -10px; height: 160px; pointer-events: none; z-index: 2; }
+  .wave { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background-repeat: repeat-x; background-size: 600px 120px; }
+  .wave.wave1 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'><path d='M0,40 C200,90 400,10 600,40 C800,70 1000,20 1200,40 L1200,120 L0,120 Z' fill='%23ffffff' opacity='0.14'/></svg>"); opacity: 0.9; transform: translateZ(0); animation: wave-move 9s linear infinite; }
+  .wave.wave2 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'><path d='M0,20 C150,60 350,0 600,20 C850,40 1050,5 1200,20 L1200,120 L0,120 Z' fill='%23ffffff' opacity='0.08'/></svg>"); opacity: 0.95; transform: translateZ(0); animation: wave-move 14s linear infinite reverse; bottom: -6px }
+
+  /* brighter light blobs for depth */
+  #play-space::before {
+    content: '';
+    position: absolute;
+    left: -10%;
+    top: -30%;
+    width: 120%;
+    height: 160%;
+    background: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.35), transparent 18%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.22), transparent 18%);
+    filter: blur(28px);
+    animation: float-slow 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* floating bubble helpers (more pronounced) */
+  .bg-bubble {
+    position: absolute;
+    bottom: -40px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.6));
+    box-shadow: 0 6px 14px rgba(18,52,86,0.06), inset 0 2px 6px rgba(255,255,255,0.25);
+    opacity: 0.95;
+    filter: blur(0.3px);
+    animation: rise 6.5s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .bg-bubble.small { width: 12px; height: 12px; animation-duration: 5s; opacity:0.8 }
+  .bg-bubble.large { width: 44px; height: 44px; animation-duration: 10s; opacity:0.6 }
+  .bg-bubble { animation-timing-function: cubic-bezier(.2,.8,.2,1); }
+
+  /* horizontal drift to make bubbles feel organic */
+  .bg-bubble { animation-name: rise, driftX; animation-duration: 6.5s, 4s; animation-iteration-count: infinite, infinite; animation-timing-function: linear, ease-in-out; }
+
+  /* Make bubbles interactive: pointer + pop state */
+  .bg-bubble { cursor: pointer; pointer-events: auto; }
+  .bg-bubble:hover { transform: translateY(-4px) scale(1.02); }
+
+  /* pop animation and removed state */
+  .bg-bubble.pop {
+    animation: pop 420ms ease-out forwards;
+    box-shadow: 0 4px 10px rgba(18,52,86,0.08), inset 0 4px 12px rgba(255,255,255,0.6);
+    opacity: 1;
+  }
+
+  @keyframes pop {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-8px) scale(1.25); opacity: 0.95; }
+    100% { transform: translateY(-20px) scale(0.25); opacity: 0; }
+  }
+
+  @keyframes driftX {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(18px); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes gradient-move { 0% { transform: translateY(0) } 50% { transform: translateY(4%) } 100% { transform: translateY(0) } }
+
+  @keyframes float-slow { from { transform: translateY(0) } 50% { transform: translateY(6%) } to { transform: translateY(0) } }
+
+  @keyframes wave-move { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+
+  @keyframes rise { 0% { transform: translateY(0) scale(0.95); opacity: 0.9 } 60% { opacity: 0.6 } 100% { transform: translateY(-620px) scale(1.05); opacity: 0 } }
+  overflow: hidden;
 }
 
-/* Style the impact story image */
-.impact-image {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.10);
+#game-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
 
-/* Donate Button Styles */
-.donate-button {
-  display: inline-block;
-  background-color: #4FCB53; /* Green */
-  color: #fff;
-  padding: 14px 32px;
+/* Falling Objects */
+.drop {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: fall 3s linear forwards;
+}
+
+.clean { background-color: var(--cw-yellow); border: 2px solid var(--dark); }
+.clean:active { box-shadow: 0 0 20px var(--cw-green); } /* Green Glow [cite: 108] */
+
+.polluted { background-color: var(--cw-red); }
+.polluted:active { box-shadow: 0 0 20px var(--cw-red); } /* Red Flash [cite: 109] */
+
+@keyframes fall {
+  from { top: -50px; }
+  to { top: 500px; }
+}
+
+/* Buttons */
+.btn-main, #start-btn, .donate-button {
+  background-color: var(--cw-yellow);
+  color: var(--dark);
+  padding: 15px 30px;
   text-decoration: none;
-  border-radius: 6px;
   font-weight: bold;
-  font-size: 1.1em;
-  margin-top: 18px;
-  box-shadow: 0 2px 8px rgba(79, 203, 83, 0.10);
-  transition: background 0.3s, transform 0.2s;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
+  transition: transform 0.2s;
 }
 
-/* Change button color when hovered */
-.donate-button:hover {
-  background-color: #159A48; /* Dark Green */
-  transform: translateY(-2px) scale(1.04); /* Slight lift */
-}
+#start-btn { background-color: var(--cw-green); color: white; font-size: 1.5rem; }
+.donate-button { background-color: var(--cw-green); color: white; }
+.btn-main:hover, .donate-button:hover { transform: scale(1.05); }
 
-/* Add some spacing between sections */
-section {
-  margin-bottom: 20px;
-}
-
-/* 
-  Media Queries for Responsive Design
-  Media queries help make your website look good on different screen sizes,
-  like phones (small screens) and computers (large screens).
-*/
-
-/* This media query applies styles when the screen is 600px wide or less (like on most phones) */
+/* Responsive Design */
 @media (max-width: 600px) {
-  /* Make hero section padding smaller on small screens */
-  .hero {
-    padding: 32px 8px;
-    font-size: 1em;
-  }
-
-  /* Make headline font size smaller so it fits on small screens */
-  .hero h1 {
-    font-size: 1.4em;
-  }
-
-  /* Make subheadline font size smaller */
-  .hero p {
-    font-size: 1em;
-  }
-
-  /* Make story and call-to-action sections have less padding */
-  .story,
-  .call-to-action,
-  .donation-section {
-    padding: 14px 8px;
-  }
-
-  /* Make impact story image smaller and stack above the text */
-  .impact-content {
-    display: block; /* Stack items vertically */
-    text-align: center;
-  }
-
-  .impact-image {
-    width: 90%;    /* Make image take up most of the width */
-    max-width: 220px;
-  }
-}
-
-/* This media query applies styles when the screen is wider than 600px (like on tablets and computers) */
-@media (min-width: 601px) {
-  /* Show image and text side by side in the impact story */
-  .impact-content {
-    display: flex;           /* Place items in a row */
-    align-items: center;     /* Vertically center items */
-    justify-content: center; /* Center the whole group */
-    gap: 28px;               /* Space between image and text */
-    text-align: left;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .impact-image {
-    width: 300px;
-  }
+  .impact-content { flex-direction: column; text-align: center; }
+  .hero h1 { font-size: 2rem; }
 }
